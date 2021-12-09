@@ -1,24 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Greet } from './components/Greet';
+import { Heading } from './components/Headng';
+import { Person} from './components/Person';
+import { PersonList } from './components/PersonList';
+import { Status } from './components/Status'
+import {Oscar} from './components/Oscar'
+import {Button} from './components/Button'
+import {Input} from './components/Input'
+import {Container} from './components/Container'
+import {LoggedIn} from './state/LoggedIn'
+import {User} from './state/User'
+import {Counter} from './state/Counter'
+
+import {ThemeContextProvider} from './context/ThemeContext';
+import {Box} from './context/Box'
 
 function App() {
+  const personName = {
+    first: 'Bruce',
+    last: 'Lee'
+  }
+
+  const nameList = [
+    {
+      first: 'Bruce',
+      last: 'Lee'
+    },
+    {
+      first: 'Joseph',
+      last: 'Kim'
+    },
+    {
+      first: 'Princess',
+      last: 'Diana'
+    }
+  ]
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Greet name="Joseph" messageNumber={20} isLogedIn={true}/>
+      <Person name={personName}/>
+      <PersonList names={nameList}/>
+      <Status status='success'/>
+      <Oscar>
+        <Heading>Oscar goes to Parasite</Heading>
+      </Oscar>
+      <Greet name="Eunyull" isLogedIn={true} />
+      <Button handleClick={(event, id)=>{
+        console.log('Button Clicked', event, id)
+      }} />
+      <Input value='' handlechange={event => {
+          console.log(event)
+      }} />
+      <Container styles={{border: '1px solid black', padding: '1rem'}}/>
+      <LoggedIn />
+      <User />
+      <Counter />
+      <ThemeContextProvider>
+        <Box />
+      </ThemeContextProvider>
     </div>
   );
 }
